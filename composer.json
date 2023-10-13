@@ -1,0 +1,19 @@
+{
+    "name": "lgrdev/simplerouter",
+    "description": "a very simple php router",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lgrdev\\SimpleRouter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lgrdev",
+            "email": "l.glesner@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^10.4"
+    }
+}
