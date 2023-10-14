@@ -1,6 +1,6 @@
 {
     "name": "lgrdev/simplerouter",
-    "description": "a very simple php router",
+    "description": "A very simple php router",
     "license": "MIT",
     "autoload": {
         "psr-4": {

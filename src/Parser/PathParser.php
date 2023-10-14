@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lgrdev\SimpleRouter\Parser;
 
-class PathParser
+class PathParser implements \Lgrdev\SimpleRouter\RouterConstantes
 {
     /**
      * Class PathParser
@@ -13,25 +13,7 @@ class PathParser
      * @package SimplifiedRouter\Parser
      */
 
-    /**
-     * Indicates that the parameter is not a route parameter.
-     */
-    public const PARAMETER_ROOT = 0;
-
-    /**
-     * Indicates that the parameter is not a route parameter.
-     */
-    public const PARAMETER_NO = 1;
-
-    /**
-     * Indicates that the parameter is a mandatory route parameter.
-     */
-    public const PARAMETER_MANDATORY = 2;
-
-    /**
-     * Indicates that the parameter is an optional route parameter.
-     */
-    public const PARAMETER_OPTIONAL = 3;
+ 
 
 
     public function __construct() {}
@@ -43,7 +25,7 @@ class PathParser
      *
      * @return bool Returns true if the path part is a parameter, false otherwise.
      */
-    private function isParam(string $pathpart): bool
+    public function isParam(string $pathpart): bool
     {
         return preg_match('/\{(\w+?)(:([[:print:]]+))?(})/', $pathpart) || preg_match('/({\?)(\w+)(:([[:print:]]+))?(})/', $pathpart) ? true : false;
     }
@@ -54,7 +36,7 @@ class PathParser
      * @param string $pathpart The path part to check.
      * @return bool Returns true if the path part is an optional parameter, false otherwise.
      */
-    private function isOptionalParam(string $pathpart): bool
+    public function isOptionalParam(string $pathpart): bool
     {
         return preg_match('/({\?)(\w+)(:([[:print:]]+))?(})/', $pathpart) ? true : false;
     }
@@ -65,7 +47,7 @@ class PathParser
      * @param string $pathpart The path part to extract the parameter name from.
      * @return string The name of the parameter, or an empty string if the path part is not a parameter.
      */
-    private function getParamName(string $pathpart): string
+    public function getParamName(string $pathpart): string
     {
         $path = trim($pathpart);
 
@@ -76,7 +58,6 @@ class PathParser
         if (substr($path, 0, 2) === '{?' && substr($path, -1, 1) === '}') {
             $path = '{' . substr($path, 2, null);
         }
-
 
         preg_match('/{(\w+?)(:([[:print:]]+))?\}/', $path, $matches);
 
@@ -91,7 +72,7 @@ class PathParser
      *
      * @return string The format of the parameter, or an empty string if the path part is not a parameter.
      */
-    private function getParamFormat(string $pathpart): string
+    public function getParamFormat(string $pathpart): string
     {
         $path = trim($pathpart);
 
