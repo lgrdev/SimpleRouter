@@ -103,8 +103,9 @@ class RouteCollection implements \Iterator
      */
     private function sortRoute(): void
     {
+        // Sort the routes by weight, descending.
         usort($this->routes, function (Route $a, Route $b) {
-            return $a->getWeight() <=> $b->getWeight();
+            return $b->getWeight() <=> $a->getWeight();
         });
     }
 

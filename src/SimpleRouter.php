@@ -47,7 +47,7 @@ class SimpleRouter
         if (empty($route) || is_string($route) === false) {
             throw new \InvalidArgumentException('Invalid route');
         }
-        if (is_callable($callback) === false) {
+        if (!is_callable($callback)) {
             throw new \InvalidArgumentException('Invalid callback');
         }
 
@@ -136,6 +136,11 @@ class SimpleRouter
      */
     public function run(string $method, string $uri)
     {
+        // Validate the URI input
+        if (!preg_match('/^[a-zA-Z0-9\/_-]+$/', $uri)) {
+            $this->redirectionErreur404();
+            return;
+        }
 
         switch ($method) {
             case SimpleRouter::METHOD_GET:
@@ -170,6 +175,5 @@ class SimpleRouter
         }
 
         $this->redirectionErreur404();
-
     }
 }
